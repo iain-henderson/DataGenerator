@@ -9,7 +9,7 @@ public class IntervalGenerator extends Generator {
 	  
 	  public IntervalGenerator(Integer rows)
 	  {
-	    super(Integer.valueOf(queueDepth), rows);
+	    super(queueDepth, rows);
 	  }
 	  
 	  public String generate()
