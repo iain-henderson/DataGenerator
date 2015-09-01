@@ -1,7 +1,6 @@
 package org.rearviewofagenius.iain.data;
 
 import org.rearviewofagenius.iain.data.generators.Generator;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.regex.Matcher;
@@ -86,165 +85,116 @@ public class DataGenerator
 		}
 		ArrayList<LinkedBlockingDeque<String>> pieces = new ArrayList<LinkedBlockingDeque<String>>();
 		if (!row.isEmpty()) {
+			// initial call of this
 			if (index == null) {
+				Format.setRowCount(rowCount);
 				pieces.addAll(parseFormat(row, 0));
-			} else if (index.intValue() == formats.size()) {
-				pieces.add(constant(row));
 			} else {
 				Format format = Format.values()[index];
 				Matcher m = format.matcher(row);
 				if (verbose) {
 					System.err.println(m.pattern().toString() + " has " + m.groupCount() + " groups");
 				}
-				if (m.matches()) { 
-					int x;
+				if (m.matches()){
 					if (verbose) {
-						for (x = 1; x <= m.groupCount(); x++) {
+						for (int x = 1; x <= m.groupCount(); x++) {
 							System.err.println(m.group(x));
 						}
 					}
 					pieces.addAll(parseFormat(m.group(1), index + 1));
+//					Object[] arguments;
+//					arguments = new Object[m.groupCount() - 2];
+//					
+//					for(int i = 0; i < arguments.length; i++){
+//						arguments[i] = m.group(i + 2); // group 2 goes in index 1 etc etc
+//					}
 
-				switch (formats.get(index).description) {
+				switch (Format.values()[index].toString()) {
 				case "DECIMAL":
+					break;
+				case "NUMBER":
 					break; 
-				case -1981034679:  if (x.equals("NUMBER")) {} break; 
-				case -1820338669:  if (x.equals("TIMETZ")) {} break; 
-				case -1783518776:  if (x.equals("VARBINARY")) {} break; 
-				case -1772648797:  if (x.equals("VARBINARY(length)")) break; break; 
-				case -1767280286:  if (x.equals("SMALLDATETIME")) {} break; 
-				case -1718637701:  if (x.equals("DATETIME")) {} break; 
-				case -1618932450:  if (x.equals("INTEGER")) {} break; 
-				case -1488324047:  if (x.equals("CHAR(length)")) {} break; 
-				case -1453246218:  if (x.equals("TIMESTAMP")) {} break; 
-				case -1344909767:  if (x.equals("CHARACTER VARYING")) {} break; 
-				case -1282431251:  if (x.equals("NUMERIC")) {} break; 
-				case -1098661223:  if (x.equals("INTERVALYM")) {} break; 
-				case -876196735:  if (x.equals("INTEGER(minimum, maximum)")) {} break; 
-				case -725171228:  if (x.equals("TELEPHONE")) {} break; 
-				case -705241604:  if (x.equals("TIMESTAMPTZ")) {} break; 
-				case -594415409:  if (x.equals("TINYINT")) {} break; 
-				case -528008493:  if (x.equals("INTEGER(maximum)")) {} break; 
-				case -428842032:  if (x.equals("BINARY(length Bits)")) {} break; 
-				case -314110058:  if (x.equals("NUMERIC(precision, scale)")) {} break; 
-				case 72655:  if (x.equals("INT")) {} break; 
-				case 80904:  if (x.equals("RAW")) {} break; 
-				case 2044650:  if (x.equals("BOOL")) {} break; 
-				case 2067286:  if (x.equals("CHAR")) {} break; 
-				case 2090926:  if (x.equals("DATE")) {} break; 
-				case 2252361:  if (x.equals("INT8")) {} break; 
-				case 2575053:  if (x.equals("TIME")) {} break; 
-				case 55823113:  if (x.equals("CHARACTER")) {} break; 
-				case 63686713:  if (x.equals("BYTEA")) {} break; 
-				case 66988604:  if (x.equals("FLOAT")) {} break; 
-				case 73541792:  if (x.equals("MONEY")) {} break; 
-				case 176095624:  if (x.equals("SMALLINT")) {} break; 
-				case 704200915:  if (x.equals("FOREIGN KEY")) {} break; 
-				case 782694408:  if (x.equals("BOOLEAN")) {} break; 
-				case 1353045189:  if (x.equals("INTERVAL")) {} break; 
-				case 1696795441:  if (x.equals("BINARY VARYING")) {} break; 
-				case 1770063567:  if (x.equals("DOUBLE PRECISION")) {} break; 
-				case 1861587932:  if (x.equals("BINARY(length)")) break; break; 
-				case 1923873926:  if (x.equals("NUMERIC(precision)")) {} break; 
-				case 1959128815:  if (x.equals("BIGINT")) {} break; 
-				case 1959329793:  if (x.equals("BINARY")) {} break; 
-				case 2028970455:  if (x.equals("FLOAT(precision)")) {} break; 
-				case 2076646780:  if (!x.equals("FLOAT8"))
-				{
-					break label1587;
-					pieces.add(binary(binaryFormat, m));
-
-					break label1634;
-					pieces.add(binaryBits(binaryFormat, m));
-
-
-
-					break label1634;
-
-
-					pieces.add(binary(binaryFormat));
-
-
-					break label1634;
-
-					pieces.add(string());
-
-					break label1634;
-					pieces.add(string(m));
-
-					break label1634;
-
-					pieces.add(bool());
-
-
-
-					break label1634;
-
-
-
-					pieces.add(integer());
-
-					break label1634;
-
-					pieces.add(integer(m));
-
-					break label1634;
+				case "TIMETZ":
+					break; 
+				case "VARBINARY":
+					break; 
+				case "VARBINARY(length)":
+					break; 
+				case "SMALLDATETIME":
+					break; 
+				case "DATETIME":
+					break; 
+				case "INTEGER":
+					break; 
+				case "CHAR(length)":
+					break; 
+				case "TIMESTAMP":
+					break; 
+				case "CHARACTER VARYING":
+					break; 
+				case "NUMERIC":
+					break; 
+				case "INTERVALYM":
+					break; 
+				case "INTEGER(minimum, maximum)":
+					break; 
+				case "TELEPHONE":
+					break; 
+				case "TIMESTAMPTZ":
+					break; 
+				case "TINYINT":
+					break; 
+				case "INTEGER(maximum)":
+					break; 
+				case "BINARY(length Bits)":
+					break; 
+				case "NUMERIC(precision, scale)":
+					break; 
+				case "INT":
+					break; 
+				case "RAW":
+					break; 
+				case "BOOL":
+					break; 
+				case "CHAR":
+					break; 
+				case "DATE":
+					break; 
+				case "INT8":
+					break; 
+				case "TIME":
+					break; 
+				case "CHARACTER":
+					break; 
+				case "BYTEA":
+					break; 
+				case "FLOAT":
+					break; 
+				case "MONEY":
+					break; 
+				case "SMALLINT":
+					break; 
+				case "FOREIGN KEY":
+					break; 
+				case "BOOLEAN":
+					break; 
+				case "INTERVAL":
+					break; 
+				case "BINARY VARYING":
+					break; 
+				case "DOUBLE PRECISION":
+					break; 
+				case "BINARY(length)":
+					break; 
+				case "NUMERIC(precision)":break; 
+				case "BIGINT":break; 
+				case "BINARY":break; 
+				case "FLOAT(precision)":break; 
+				case "FLOAT8":
+					break;
+				default:
+					break;
 				}
-				else
-				{
-					pieces.add(doublePrecision());
-
-					break label1634;
-
-					pieces.add(numeric(m));
-
-					break label1634;
-
-					pieces.add(numeric());
-
-					break label1634;
-					pieces.add(number());
-
-					break label1634;
-					pieces.add(money());
-
-					break label1634;
-					pieces.add(date());
-
-					break label1634;
-					pieces.add(time());
-
-					break label1634;
-					pieces.add(timetz());
-
-
-					break label1634;
-
-					pieces.add(timestamp());
-
-					break label1634;
-					pieces.add(timestamptz());
-
-					break label1634;
-					pieces.add(intervalYM());
-
-					break label1634;
-					pieces.add(interval());
-
-					break label1634;
-					pieces.add(telephone());
-
-					break label1634;
-					pieces.add(foreignKey(m)); }
-				break;
-				}
-
-				label1587:
-					System.err.println(formatsgetintValuename);
-				pieces.add(constant(formatsgetintValuename));
-
-				label1634:
-
 					pieces.addAll(parseFormat(m.group(m.groupCount()), index));
 				} else {
 					pieces.addAll(parseFormat(row, Integer.valueOf(index.intValue() + 1)));
@@ -449,22 +399,25 @@ public class DataGenerator
 //	     formats.add(new Format("NUMBER", Pattern.compile("(.*?)NUMBER(.*)")));
 //	     formats.add(new Format("MONEY", Pattern.compile("(.*?)MONEY(.*)")));
 //	     formats.add(new Format("FOREIGN KEY", Pattern.compile("(.*?)FOREIGN ?KEY\\((.*?)\\)(.*)")));
-//	     formats.add(new Format("TELEPHONE", Pattern.compile("(.*?)TELEPHONE(.*)")));
 
-		VARBINARY("VARBINARY(length)", Pattern.compile("(.*?)(?:LONG )?VARBINARY\\(([0-9]+)\\)(.*)"), "org.rearviewofagenius.iain.data.generators.BinaryGenerator"),
-		CONSTANT("CONSTANT", null, "org.rearviewofagenius.iain.data.generators.ConstantGenerator");
+		VARBINARY("VARBINARY(length)", "(.*?)(?:LONG )?VARBINARY\\(([0-9]+)\\)(.*)", "org.rearviewofagenius.iain.data.generators.BinaryGenerator"),
+		FOREIGNKEY("FOREIGN KEY", "(.*?)FOREIGN ?KEY\\((.*?)\\)(.*)", "org.rearviewofagenius.iain.data.generators.StringGenerator"),
+		TELEPHONE("TELEPHONE", "(.*?)TELEPHONE(.*)", "org.rearviewofagenius.iain.data.generators.TelephoneNumberGenerator"),
+		CONSTANT("CONSTANT", "(.*?)", "org.rearviewofagenius.iain.data.generators.ConstantGenerator");
+
 		final private String description;
-		final private Pattern pattern;
 		final private String generator;
+		final private Pattern pattern;
+		
 		private static Integer rowCount = 10;
 		
-		Format(String d, Pattern p, String g) {
+		Format(String d, String p, String g) {
 			description = d;
 			generator = g;
-			pattern = p;
+			pattern = Pattern.compile(p);
 		}
 		
-		public synchronized void setRowCount(Integer rc){
+		static public synchronized void setRowCount(Integer rc){
 			rowCount = rc;
 		}
 		
@@ -479,16 +432,16 @@ public class DataGenerator
 		}
 
 		// Automated method for when the matched groups line up with the constructor arguments
-		public LinkedBlockingDeque<String> deque(String row){
-			Object[] arguments;
-			Matcher m = matcher(row);
-			arguments = new Object[m.groupCount() - 2];
-			
-			for(int i = 0; i < arguments.length; i++){
-				arguments[i] = m.group(i + 2); // group 2 goes in index 1 etc etc
-			}
-			
-			return deque(rowCount, arguments);
-		}
+//		public LinkedBlockingDeque<String> deque(String row){
+//			Matcher m = matcher(row);
+//		Object[] arguments;
+//			arguments = new Object[m.groupCount() - 2];
+//			
+//			for(int i = 0; i < arguments.length; i++){
+//				arguments[i] = m.group(i + 2); // group 2 goes in index 1 etc etc
+//			}
+//			
+//			return deque(rowCount, arguments);
+//		}
 	}
 }

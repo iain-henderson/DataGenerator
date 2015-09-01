@@ -1,7 +1,5 @@
 package org.rearviewofagenius.iain.data.generators;
 
-import org.rearviewofagenius.iain.data.generators.Generator;
-
 public class ConstantGenerator extends Generator {
   String constant = "";
   
