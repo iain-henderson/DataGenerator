@@ -356,20 +356,24 @@ public class DataGenerator
 
 	private enum Format{
 
-//	     formats.add(new Format("VARBINARY(length)", Pattern.compile("(.*?)(?:LONG )?VARBINARY\\(([0-9]+)\\)(.*)")));
-//	     formats.add(new Format("BINARY(length Bits)", Pattern.compile("(.*?)BINARY\\(([0-9]+) [Bb][Ii][Tt][Ss]\\)(.*)")));
-//	     formats.add(new Format("BINARY(length)", Pattern.compile("(.*?)BINARY\\(([0-9]+)\\)(.*)")));
-//	     formats.add(new Format("VARBINARY", Pattern.compile("(.*?)(?:LONG )?VARBINARY(.*)")));
-//	     formats.add(new Format("BINARY VARYING", Pattern.compile("(.*?)BINARY VARYING(.*)")));
-//	     formats.add(new Format("BINARY", Pattern.compile("(.*?)BINARY(.*)")));
-//	     formats.add(new Format("BYTEA", Pattern.compile("(.*?)BYTEA(.*)")));
-//	     formats.add(new Format("RAW", Pattern.compile("(.*?)RAW(.*)")));
-//	     formats.add(new Format("BOOLEAN", Pattern.compile("(.*?)BOOLEAN(.*)")));
-//	     formats.add(new Format("BOOL", Pattern.compile("(.*?)BOOL(.*)")));
+		VARBINARY_LENGTH("VARBINARY(length)", "(.*?)(?:LONG )?VARBINARY\\(([0-9]+)\\)(.*)", "org.rearviewofagenius.iain.data.generators.BinaryGenerator"),
+		BINARY_BITS("BINARY(length Bits)","(.*?)BINARY\\(([0-9]+) [Bb][Ii][Tt][Ss]\\)(.*)","org.rearviewofagenius.iain.data.generators.BinaryGenerator"),
+		BINARY_LENGTH("BINARY(length)","(.*?)BINARY\\(([0-9]+)\\)(.*)","org.rearviewofagenius.iain.data.generators.BinaryGenerator"),
+		VARBINARY("VARBINARY","(.*?)(?:LONG )?VARBINARY(.*)","org.rearviewofagenius.iain.data.generators.BinaryGenerator"),
+		BINARY_VARYING("BINARY VARYING","(.*?)BINARY VARYING(.*)","org.rearviewofagenius.iain.data.generators.BinaryGenerator"),
+		BINARY("BINARY","(.*?)BINARY(.*)","org.rearviewofagenius.iain.data.generators.BinaryGenerator"),
+		BYTEA("BYTEA","(.*?)BYTEA(.*)","org.rearviewofagenius.iain.data.generators.BinaryGenerator"),
+		RAW("RAW","(.*?)RAW(.*)","org.rearviewofagenius.iain.data.generators.BinaryGenerator"),
+		BOOLEAN("BOOLEAN","(.*?)BOOLEAN(.*)","org.rearviewofagenius.iain.data.generators.BooleanGenerator"),
+		BOOL("BOOL","(.*?)BOOL(.*)","org.rearviewofagenius.iain.data.generators.BooleanGenerator"),
 //	     formats.add(new Format("CHARACTER VARYING", Pattern.compile("(.*?)CHARACTER VARYING(.*)")));
 //	     formats.add(new Format("CHARACTER", Pattern.compile("(.*?)CHARACTER(.*)")));
 //	     formats.add(new Format("CHAR(length)", Pattern.compile("(.*?)(?:LONG )?(?:VAR)?CHAR\\(([0-9]+)\\)(.*)")));
 //	     formats.add(new Format("CHAR", Pattern.compile("(.*?)(?:LONG )?(?:VAR)?CHAR(.*)")));
+		CHARACTER_VARYING("CHARACTER VARYING", "(.*?)CHARACTER VARYING(.*)", "org.rearviewofagenius.iain.data.generators.StringGenerator"),
+		CHARACTER("CHARACTER", "(.*?)CHARACTER(.*)", "org.rearviewofagenius.iain.data.generators.StringGenerator"),
+		CHAR_LENGTH("CHAR(length)", "(.*?)(?:LONG )?(?:VAR)?CHAR\\(([0-9]+)\\)(.*)", "org.rearviewofagenius.iain.data.generators.StringGenerator"),
+		CHAR("CHAR", "(.*?)(?:LONG )?(?:VAR)?CHAR(.*)", "org.rearviewofagenius.iain.data.generators.StringGenerator"),
 //	     formats.add(new Format("TIMETZ", Pattern.compile("(.*?)TIMETZ(.*)")));
 //	     formats.add(new Format("TIMESTAMPTZ", Pattern.compile("(.*?)TIMESTAMPTZ(.*)")));
 //	     formats.add(new Format("SMALLDATETIME", Pattern.compile("(.*?)SMALLDATETIME(.*)")));
@@ -377,30 +381,27 @@ public class DataGenerator
 //	     formats.add(new Format("TIMESTAMP", Pattern.compile("(.*?)TIMESTAMP(.*)")));
 //	     formats.add(new Format("DATE", Pattern.compile("(.*?)DATE(.*)")));
 //	     formats.add(new Format("TIME", Pattern.compile("(.*?)TIME(.*)")));
-//	     formats.add(new Format("INTERVALYM", Pattern.compile("(.*?)INTERVALYM(.*)")));
-//	     formats.add(new Format("INTERVAL", Pattern.compile("(.*?)INTERVAL(.*)")));
-//	     formats.add(new Format("DOUBLE PRECISION", Pattern.compile("(.*?)DOUBLE PRECISION(.*)")));
-//	     formats.add(new Format("REAL", Pattern.compile("(.*?)REAL(.*)")));
-//	     formats.add(new Format("FLOAT(precision)", Pattern.compile("(.*?)FLOAT\\(([0-9]+)\\)(.*)")));
-//	     formats.add(new Format("FLOAT8", Pattern.compile("(.*?)FLOAT8(.*)")));
-//	     formats.add(new Format("FLOAT", Pattern.compile("(.*?)FLOAT(.*)")));
-//	     formats.add(new Format("INTEGER(minimum, maximum)", Pattern.compile("(.*?)INTEGER\\(([0-9]+), ?([0-9]+)\\)(.*)")));
-//	     formats.add(new Format("INTEGER(maximum)", Pattern.compile("(.*?)INTEGER\\(([0-9]+)\\)(.*)")));
-//	     formats.add(new Format("INTEGER", Pattern.compile("(.*?)INTEGER(.*)")));
-//	     formats.add(new Format("BIGINT", Pattern.compile("(.*?)BIGINT(.*)")));
-//	     formats.add(new Format("INT8", Pattern.compile("(.*?)INT8(.*)")));
-//	     formats.add(new Format("SMALLINT", Pattern.compile("(.*?)SMALLINT(.*)")));
-//	     formats.add(new Format("TINYINT", Pattern.compile("(.*?)TINYINT(.*)")));
-//	     formats.add(new Format("INT", Pattern.compile("(.*?)INT(.*)")));
-//	     formats.add(new Format("NUMERIC(precision, scale)", Pattern.compile("(.*?)NUMERIC\\(([0-9]+), ?([0-9]+)\\)(.*)")));
-//	     formats.add(new Format("NUMERIC(precision)", Pattern.compile("(.*?)NUMERIC\\(([0-9]+)\\)(.*)")));
-//	     formats.add(new Format("NUMERIC", Pattern.compile("(.*?)NUMERIC(.*)")));
-//	     formats.add(new Format("DECIMAL", Pattern.compile("(.*?)DECIMAL(.*)")));
-//	     formats.add(new Format("NUMBER", Pattern.compile("(.*?)NUMBER(.*)")));
-//	     formats.add(new Format("MONEY", Pattern.compile("(.*?)MONEY(.*)")));
-//	     formats.add(new Format("FOREIGN KEY", Pattern.compile("(.*?)FOREIGN ?KEY\\((.*?)\\)(.*)")));
-
-		VARBINARY("VARBINARY(length)", "(.*?)(?:LONG )?VARBINARY\\(([0-9]+)\\)(.*)", "org.rearviewofagenius.iain.data.generators.BinaryGenerator"),
+		INTERVALYM("INTERVALYM","(.*?)INTERVALYM(.*)","org.rearviewofagenius.iain.data.generators.IntervalYMGenerator"),
+		INTERVAL("INTERVAL","(.*?)INTERVAL(.*)","org.rearviewofagenius.iain.data.generators.IntervalGenerator"),
+		DOUBLE_PRECISION("DOUBLE PRECISION","(.*?)DOUBLE PRECISION(.*)","org.rearviewofagenius.iain.data.generators.FloatGenerator"),
+		REAL("REAL","(.*?)REAL(.*)","org.rearviewofagenius.iain.data.generators.FloatGenerator"),
+		FLOAT_PRECISION("FLOAT(precision)","(.*?)FLOAT\\(([0-9]+)\\)(.*)","org.rearviewofagenius.iain.data.generators.FloatGenerator"),
+		FLOAT8("FLOAT8","(.*?)FLOAT8(.*)","org.rearviewofagenius.iain.data.generators.FloatGenerator"),
+		FLOAT("FLOAT","(.*?)FLOAT(.*)","org.rearviewofagenius.iain.data.generators.FloatGenerator"),
+		INTEGER_MINIMUM_MAXIMUM("INTEGER(minimum, maximum)","(.*?)INTEGER\\(([0-9]+), ?([0-9]+)\\)(.*)","org.rearviewofagenius.iain.data.generators.IntegerGenerator"),
+		INTEGER_MAXIMUM("INTEGER(maximum)","(.*?)INTEGER\\(([0-9]+)\\)(.*)","org.rearviewofagenius.iain.data.generators.IntegerGenerator"),
+		INTEGER("INTEGER","(.*?)INTEGER(.*)","org.rearviewofagenius.iain.data.generators.IntegerGenerator"),
+		BIGINT("BIGINT","(.*?)BIGINT(.*)","org.rearviewofagenius.iain.data.generators.IntegerGenerator"),
+		INT8("INT8","(.*?)INT8(.*)","org.rearviewofagenius.iain.data.generators.IntegerGenerator"),
+		SMALLINT("SMALLINT","(.*?)SMALLINT(.*)","org.rearviewofagenius.iain.data.generators.IntegerGenerator"),
+		TINYINT("TINYINT","(.*?)TINYINT(.*)","org.rearviewofagenius.iain.data.generators.IntegerGenerator"),
+		INT("INT","(.*?)INT(.*)","org.rearviewofagenius.iain.data.generators.IntegerGenerator"),
+		NUMERIC_PRECISION_SCALE("NUMERIC(precision, scale)","(.*?)NUMERIC\\(([0-9]+), ?([0-9]+)\\)(.*)","org.rearviewofagenius.iain.data.generators.NumericGenerator"),
+		NUMERIC_PRECISION("NUMERIC(precision)","(.*?)NUMERIC\\(([0-9]+)\\)(.*)","org.rearviewofagenius.iain.data.generators.NumericGenerator"),
+		NUMERIC("NUMERIC","(.*?)NUMERIC(.*)","org.rearviewofagenius.iain.data.generators.NumericGenerator"),
+		DECIMAL("DECIMAL","(.*?)DECIMAL(.*)","org.rearviewofagenius.iain.data.generators.NumericGenerator"),
+		NUMBER("NUMBER","(.*?)NUMBER(.*)","org.rearviewofagenius.iain.data.generators.NumericGenerator"),
+		MONEY("MONEY","(.*?)MONEY(.*)","org.rearviewofagenius.iain.data.generators.NumericGenerator"),
 		FOREIGNKEY("FOREIGN KEY", "(.*?)FOREIGN ?KEY\\((.*?)\\)(.*)", "org.rearviewofagenius.iain.data.generators.StringGenerator"),
 		TELEPHONE("TELEPHONE", "(.*?)TELEPHONE(.*)", "org.rearviewofagenius.iain.data.generators.TelephoneNumberGenerator"),
 		CONSTANT("CONSTANT", "(.*?)", "org.rearviewofagenius.iain.data.generators.ConstantGenerator");
