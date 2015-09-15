@@ -106,8 +106,6 @@ public class DataGenerator
 			if (index == null) {
 				pieces.addAll(parseFormat(row, 0));
 			} else {
-				System.out.print(row + " -> ");
-				System.out.println("Format.values: " + index + "/" + Format.values().length);
 				Format format = Format.values()[index];
 				Matcher m = format.matcher(row);
 				if (verbose) {
