@@ -15,8 +15,6 @@ public class DataGenerator
 
 	ArrayList<LinkedBlockingDeque<String>> pieces = new ArrayList<LinkedBlockingDeque<String>> ();
 
-	static ArrayList<Format> formats = new ArrayList<Format>();
-
 	public static void main(String[] args)
 	{
 		String binaryFormat = "octets";
@@ -92,7 +90,7 @@ public class DataGenerator
 			System.err.println("index: " + index);
 			if (index == null) {
 				System.err.println(row);
-			} else if (index < formats.size()) {
+			} else if (index < Format.values().length) {
 				System.err.println(Format.values()[index] + ": " + row);
 			} else {
 				System.err.println(row + " CONSTANT");
@@ -117,116 +115,20 @@ public class DataGenerator
 							System.err.println(m.group(x));
 						}
 					}
-					if(m.groupCount() > 1){
+
+					// constant SHOULD catch the entire row and leave nothing else
+					if(!format.toString().equalsIgnoreCase("CONSTANT")){
 						pieces.addAll(parseFormat(m.group(1), index + 1));
 					}
-					Object[] arguments = new Object[0];
-					//					arguments = new Object[m.groupCount() - 2];
-					//					
-					//					for(int i = 0; i < arguments.length; i++){
-					//						arguments[i] = m.group(i + 2); // group 2 goes in index 1 etc etc
-					//					}
 
-					switch (Format.values()[index].toString()) {
-					case "DECIMAL":
-						break;
-					case "NUMBER":
-						break; 
-					case "TIMETZ":
-						break; 
-					case "VARBINARY":
-						break; 
-					case "VARBINARY(length)":
-						break; 
-					case "SMALLDATETIME":
-						break; 
-					case "DATETIME":
-						break; 
-					case "INTEGER":
-						break; 
-					case "CHAR(length)":
-						break; 
-					case "TIMESTAMP":
-						break; 
-					case "CHARACTER VARYING":
-						break; 
-					case "NUMERIC":
-						break; 
-					case "INTERVALYM":
-						break; 
-					case "INTEGER(minimum, maximum)":
-						break; 
-					case "TELEPHONE":
-						break; 
-					case "TIMESTAMPTZ":
-						break; 
-					case "TINYINT":
-						break; 
-					case "INTEGER(maximum)":
-						break; 
-					case "BINARY(length Bits)":
-						break; 
-					case "NUMERIC(precision, scale)":
-						break; 
-					case "INT":
-						break; 
-					case "RAW":
-						break; 
-					case "BOOL":
-						break; 
-					case "CHAR":
-						break; 
-					case "DATE":
-						break; 
-					case "INT8":
-						break; 
-					case "TIME":
-						break; 
-					case "CHARACTER":
-						break; 
-					case "BYTEA":
-						break; 
-					case "FLOAT":
-						break; 
-					case "MONEY":
-						break; 
-					case "SMALLINT":
-						break; 
-					case "FOREIGN KEY":
-						break; 
-					case "BOOLEAN":
-						break; 
-					case "INTERVAL":
-						break; 
-					case "BINARY VARYING":
-						break; 
-					case "DOUBLE PRECISION":
-						break; 
-					case "BINARY(length)":
-						break; 
-					case "NUMERIC(precision)":
-						break; 
-					case "BIGINT":
-						break; 
-					case "BINARY":
-						break; 
-					case "FLOAT(precision)":
-						break; 
-					case "FLOAT8":
-						break;
-					case "CONSTANT":
-						arguments = new Object[1];
-						arguments[0] = m.group();
-						break;
-					default:
-						break;
-					}
-					pieces.add(format.deque(arguments));
-					if(m.groupCount() > 1){
+					pieces.add(format.deque(format.arguments(m)));
+
+					// constant SHOULD catch the entire row and leave nothing else
+					if(!format.toString().equalsIgnoreCase("CONSTANT")){
 						pieces.addAll(parseFormat(m.group(m.groupCount()), index));
 					}
 				} else {
-					pieces.addAll(parseFormat(row, Integer.valueOf(index.intValue() + 1)));
+					pieces.addAll(parseFormat(row, index + 1));
 				}
 			}
 		}
