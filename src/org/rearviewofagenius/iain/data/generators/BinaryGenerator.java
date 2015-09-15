@@ -79,14 +79,14 @@ public class BinaryGenerator extends Generator {
 	        for (int j = 0; j < bytes; j++)
 	        {
 	          v = (byteArray[j] & 0xFF);
-	          chars[(j * 8)] = hexArray[(byteArray[j] / 128)];
-	          chars[(j * 8 + 1)] = hexArray[(byteArray[j] % 128 / 64)];
-	          chars[(j * 8 + 2)] = hexArray[(byteArray[j] % 64 / 32)];
-	          chars[(j * 8 + 3)] = hexArray[(byteArray[j] % 32 / 16)];
-	          chars[(j * 8 + 4)] = hexArray[(byteArray[j] % 16 / 8)];
-	          chars[(j * 8 + 5)] = hexArray[(byteArray[j] % 8 / 4)];
-	          chars[(j * 8 + 6)] = hexArray[(byteArray[j] % 4 / 2)];
-	          chars[(j * 8 + 7)] = hexArray[(byteArray[j] % 2)];
+	          chars[(j * 8)] = hexArray[(v / 128)];
+	          chars[(j * 8 + 1)] = hexArray[(v % 128 / 64)];
+	          chars[(j * 8 + 2)] = hexArray[(v % 64 / 32)];
+	          chars[(j * 8 + 3)] = hexArray[(v % 32 / 16)];
+	          chars[(j * 8 + 4)] = hexArray[(v % 16 / 8)];
+	          chars[(j * 8 + 5)] = hexArray[(v % 8 / 4)];
+	          chars[(j * 8 + 6)] = hexArray[(v % 4 / 2)];
+	          chars[(j * 8 + 7)] = hexArray[(v % 2)];
 	        }
 	        break;
         default:

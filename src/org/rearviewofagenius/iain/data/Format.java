@@ -80,8 +80,13 @@ enum Format{
 	public Matcher matcher(String row){
 		return pattern.matcher(row);
 	}
-	public LinkedBlockingDeque<String> deque(Object... arguments){
-		return Generator.get(generator, rowCount, arguments);
+	public LinkedBlockingDeque<String> deque(Object... a){
+		Object[] arguments = new Object[a.length + 1];
+		
+		arguments[0] = rowCount;
+		System.arraycopy(a, 0, arguments, 1, a.length);
+
+		return Generator.get(generator, arguments);
 	}
 
 	// Automated method for when the matched groups line up with the constructor arguments
