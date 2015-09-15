@@ -21,11 +21,11 @@ public abstract class Generator implements Runnable
 
 	static ExecutorService es = Executors.newCachedThreadPool();
 
-
+	static boolean verbose = false;
+	
 	LinkedBlockingDeque<String> deque;
 
 	boolean unique = false;
-
 
 	public static LinkedBlockingDeque<String> get(String generatorClass, Object... arguments)
 	{
@@ -117,6 +117,10 @@ public abstract class Generator implements Runnable
 		for (Runnable r : es.shutdownNow()) {
 			System.out.print(r.toString() + " is still running");
 		}
+	}
+	
+	public static void setVerbose(boolean v){
+		verbose = v;
 	}
 
 	public static boolean nextBoolean()

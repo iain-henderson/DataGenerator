@@ -6,31 +6,8 @@ public class BinaryGenerator extends Generator {
 	  int v;
 	  byte[] byteArray;
 	  char[] chars;
-	  String format = "octets";
+	  static String format = "octets";
 	  protected static final char[] hexArray = "0123456789ABCDEF".toCharArray();
-	  
-	  public BinaryGenerator(Integer rows, String format, Integer bytes, Integer bits)
-	  {
-	    this(rows, bytes, bits);
-	    unique = (!format.equalsIgnoreCase("octets"));
-	    
-	    this.format = format;
-	    switch (format){
-	    case "hex": 
-	        chars = new char[bytes.intValue() * 2 + 2];
-	        break;
-	    case "bitstring":
-	        chars = new char[bytes.intValue() * 8];
-	        break;
-        default:
-    	    chars = new char[bytes.intValue() * 5 + 2];
-	    }
-	  }
-	  
-	  public BinaryGenerator(Integer rows, String format, Integer bytes)
-	  {
-	    this(rows, format, bytes, Integer.valueOf(0));
-	  }
 	  
 	  public BinaryGenerator(Integer rows, Integer bytes, Integer bits){
 	    super(queueDepth, rows);
@@ -49,11 +26,7 @@ public class BinaryGenerator extends Generator {
 	  public BinaryGenerator(Integer rows, Integer bytes){
 	    this(rows, bytes, 0);
 	  }
-	  
-	  public BinaryGenerator(Integer rows, String format){
-	    this(rows, format, 8, 0);
-	  }
-	  
+
 	  public BinaryGenerator(Integer rows){
 	    this(rows, 8, 0);
 	  }
@@ -104,6 +77,9 @@ public class BinaryGenerator extends Generator {
 	    return new String(chars);
 	  }
 	  
+	  public static void setBinaryFormat(String bf){
+		  format = bf;
+	  }
 	  public String toString(){
 	    return "Binary Generator";
 	  }

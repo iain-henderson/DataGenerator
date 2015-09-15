@@ -1,6 +1,7 @@
 package org.rearviewofagenius.iain.data;
 
 import org.rearviewofagenius.iain.data.generators.Generator;
+import org.rearviewofagenius.iain.data.generators.BinaryGenerator;
 import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.regex.Matcher;
@@ -8,7 +9,6 @@ import java.util.regex.Matcher;
 public class DataGenerator
 {
 	static boolean verbose = false;
-	static String binaryFormat = "octets";
 
 	//	String row = "";
 	//	Integer rowCount = 10;
@@ -28,15 +28,18 @@ public class DataGenerator
 				case "--verbose":
 				case "-v":
 					verbose = true;
+					break;
 				case "--hex":
 				case "--hexadecimal":
 				case "-h":
 					binaryFormat = "hex";
+					break;
 				case "--bit":
 				case "--bit-string":
 				case "--bitstring":
 				case "-b":
 					binaryFormat = "bitstring";
+					break;
 				}
 			} else {
 				if(row.isEmpty()){
@@ -54,12 +57,13 @@ public class DataGenerator
 			System.err.println(System.currentTimeMillis() - time.longValue() + "ms");
 	}
 
-	public static void binaryFormat(String format) {
-		binaryFormat = format;
+	public static void binaryFormat(String bf) {
+		BinaryGenerator.setBinaryFormat(bf);
 	}
 
-	public static void verbose(boolean verbose) {
-		DataGenerator.verbose = verbose;
+	public static void verbose(boolean v) {
+		DataGenerator.verbose = v;
+		Generator.setVerbose(v);
 	}
 
 	public static void generate(String row, Integer rowCount) {
