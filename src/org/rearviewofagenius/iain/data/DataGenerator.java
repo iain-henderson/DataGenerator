@@ -23,7 +23,7 @@ public class DataGenerator
 		boolean verbose = false;
 
 		for(int i = 0; i < args.length; i++){
-			if(args[i].startsWith("-")){
+			if(args[i].startsWith("--")){
 				switch(args[i]){
 				case "--verbose":
 				case "-v":
@@ -41,7 +41,21 @@ public class DataGenerator
 					binaryFormat = "bitstring";
 					break;
 				}
-			} else {
+			} else if(args[i].startsWith("-")){
+				for(char a : args[i].substring(1).toCharArray()){
+					switch(a){
+					case 'v':
+						verbose = true;
+						break;
+					case 'h':
+						binaryFormat = "hex";
+						break;
+					case 'b':
+						binaryFormat = "bitstring";
+						break;
+					}
+				}
+			} else{
 				if(row.isEmpty()){
 					row = args[i];
 				} else {
