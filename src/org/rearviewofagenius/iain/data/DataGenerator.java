@@ -24,20 +24,17 @@ public class DataGenerator
 
 		for(int i = 0; i < args.length; i++){
 			if(args[i].startsWith("--")){
-				switch(args[i]){
+				switch(args[i].substring(2)){
 				case "--verbose":
-				case "-v":
 					verbose = true;
 					break;
-				case "--hex":
-				case "--hexadecimal":
-				case "-h":
+				case "hex":
+				case "hexadecimal":
 					binaryFormat = "hex";
 					break;
-				case "--bit":
-				case "--bit-string":
-				case "--bitstring":
-				case "-b":
+				case "bit":
+				case "bit-string":
+				case "bitstring":
 					binaryFormat = "bitstring";
 					break;
 				}
@@ -67,8 +64,9 @@ public class DataGenerator
 		DataGenerator.binaryFormat(binaryFormat);
 		DataGenerator.verbose(verbose);
 		DataGenerator.generate(row,rowCount);
-		if (verbose)
+		if (verbose){
 			System.err.println(System.currentTimeMillis() - time.longValue() + "ms");
+		}
 	}
 
 	public static void binaryFormat(String bf) {

@@ -24,7 +24,7 @@ public class StringGenerator extends Generator implements Callable<ArrayList<Lon
 	ExecutorService fileReaders = es;
 
 	public StringGenerator(Integer rows) {
-		this(rows, dictionary, Integer.valueOf(0));
+		this(rows, dictionary, 0);
 		unique = false;
 	}
 
@@ -33,11 +33,12 @@ public class StringGenerator extends Generator implements Callable<ArrayList<Lon
 	}
 
 	public StringGenerator(Integer rows, String file) {
-		this(rows, file, Integer.valueOf(0));
+		this(rows, file, 0);
 	}
 
 	public StringGenerator(Integer rows, String file, Integer length) {
-		super(Integer.valueOf(queueDepth), rows);unique = true;
+		super(Integer.valueOf(queueDepth), rows);
+		unique = true;
 		try {
 			if (file.equalsIgnoreCase(dictionary)) {
 				file = dictionary();
@@ -59,9 +60,9 @@ public class StringGenerator extends Generator implements Callable<ArrayList<Lon
 		} catch (FileNotFoundException fnfe) {
 			System.err.println(fnfe.getMessage());
 			System.exit(4246);
-			if (length.intValue() > 0) {
-				this.length = length.intValue();
-			}
+		}
+		if (length > 0) {
+			this.length = length;
 		}
 	}
 
